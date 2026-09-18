@@ -3,7 +3,10 @@
  * Handles API calls, loading states, result rendering, and history storage.
  */
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = window.location.port === '3000' || window.location.port === '5500' || window.location.hostname === '127.0.0.1' 
+  ? 'http://localhost:8000' 
+  : '';
+
 
 // ─── QUICK EXAMPLE DATA ──────────────────────────────────────
 
