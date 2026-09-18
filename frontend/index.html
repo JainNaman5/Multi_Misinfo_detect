@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeritasNLP — Multilingual Misinformation & Clickbait Detection Engine</title>
+  <meta name="description" content="AI-powered detector for misinformation and clickbait across 12+ languages using NLP and Machine Learning.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <!-- Animated Background Mesh -->
+  <div class="bg-mesh"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" style="position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px); background: rgba(8,11,20,0.8); border-bottom: 1px solid var(--glass-border); padding: 16px 24px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 36px; height: 36px; background: var(--grad-hero); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🛡️</div>
+        <div>
+          <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; background: var(--grad-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">VeritasNLP</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: -2px;">Misinformation & Clickbait Engine</span>
+        </div>
+      </div>
+
+      <!-- API Status indicator -->
+      <div style="display: flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--glass-border); padding: 6px 14px; border-radius: 9999px; font-size: 0.8rem; color: var(--text-secondary);">
+        <span id="api-status-dot" class="api-dot checking"></span>
+        <span id="api-status-text">Checking...</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <main style="max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1;">
+    
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-eyebrow">
+        <i data-lucide="sparkles" style="width:14px;height:14px;"></i> NLP & ML Powered Detection
+      </div>
+      <h1 class="hero-title">
+        Detect Misinformation & Clickbait in Any Language
+      </h1>
+      <p class="hero-subtitle">
+        Analyze news, headlines, and social posts across 12+ languages with real-time risk scores, red-flag highlighting, and granular credibility metrics.
+      </p>
+    </section>
+
+    <!-- ANALYZER SECTION -->
+    <section class="analyzer-section">
+      <div class="analyzer-grid">
+        
+        <!-- INPUT CARD -->
+        <div class="glass-card" style="padding: 24px; display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 5;">
+          
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem;">
+              <i data-lucide="file-text" style="color: var(--accent-violet); width:18px; height:18px;"></i> Input Content
+            </div>
+            
+            <!-- Language dropdown -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <label for="lang-select" style="font-size: 0.8rem; color: var(--text-muted);">Language:</label>
+              <select id="lang-select" style="background: var(--bg-secondary); border: 1px solid var(--glass-border); color: var(--text-primary); padding: 6px 12px; border-radius: var(--radius-sm); font-size: 0.85rem; outline: none; cursor: pointer;">
+                <option value="">Auto Detect 🌐</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Textarea -->
+          <div style="position: relative; z-index: 10;">
+            <textarea id="text-input" class="form-textarea" rows="7" placeholder="Paste article text, headline, social media post, or claim here to analyze credibility..." style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 16px; color: var(--text-primary); font-family: var(--font-sans); font-size: 0.95rem; resize: vertical; outline: none; transition: border-color 0.2s; position: relative; z-index: 10; pointer-events: auto;"></textarea>
+            <div id="char-count" style="text-align: right; font-size: 0.78rem; color: var(--text-muted); margin-top: 6px;">0 / 10,000 characters</div>
+          </div>
+
+          <!-- Action Button -->
+          <div>
+            <button id="analyze-btn" class="btn btn-primary" style="width: 100%; padding: 14px; background: var(--grad-hero); border: none; border-radius: var(--radius-md); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s;">
+              <i data-lucide="zap" style="width:18px;height:18px;"></i> Analyze Text
+            </button>
+          </div>
+
+          <!-- Quick Sample Inputs -->
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 10px;">Quick Test Examples:</div>
+            <div id="quick-chips" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+          </div>
+        </div>
+
+        <!-- OUTPUT PANEL -->
+        <div class="glass-card" style="padding: 24px; min-height: 440px;">
+          <div id="result-panel" class="result-panel">
+            <div class="result-empty" style="text-align: center; padding: 60px 20px; color: var(--text-muted);">
+              <div class="result-empty-icon" style="font-size: 3rem; margin-bottom: 12px;">🛡️</div>
+              <p class="result-empty-text" style="font-size: 0.95rem; line-height: 1.6;">Enter text on the left and click <strong>Analyze Text</strong> to view misinformation risk, clickbait score, and detected language patterns.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/analyzer.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

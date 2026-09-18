@@ -1,0 +1,353 @@
+/* =========================================================
+   animations.css — Micro-animations & Transitions
+   ========================================================= */
+
+/* ─── KEYFRAMES ──────────────────────────────────────────── */
+
+@keyframes meshFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(60px, 40px) scale(1.1); }
+  66%       { transform: translate(-40px, 80px) scale(0.95); }
+}
+
+@keyframes meshFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%       { transform: translate(-80px, -60px) rotate(10deg); }
+}
+
+@keyframes meshFloat3 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  50%       { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Confidence ring fill */
+@keyframes ringFill {
+  from { stroke-dashoffset: 314; }
+  to   { stroke-dashoffset: var(--ring-offset); }
+}
+
+/* Progress bar fill */
+@keyframes barFill {
+  from { width: 0%; }
+  to   { width: var(--bar-width); }
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 16px rgba(109,81,255,0.3); }
+  50%       { box-shadow: 0 0 36px rgba(109,81,255,0.6), 0 0 60px rgba(109,81,255,0.2); }
+}
+
+@keyframes pulseGlowSafe {
+  0%, 100% { box-shadow: 0 0 16px rgba(16,185,129,0.3); }
+  50%       { box-shadow: 0 0 36px rgba(16,185,129,0.6); }
+}
+
+@keyframes pulseGlowDanger {
+  0%, 100% { box-shadow: 0 0 16px rgba(239,68,68,0.3); }
+  50%       { box-shadow: 0 0 36px rgba(239,68,68,0.6); }
+}
+
+/* Shimmer */
+@keyframes shimmer {
+  0%   { background-position: -700px 0; }
+  100% { background-position: 700px 0; }
+}
+
+/* Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scanning line */
+@keyframes scan {
+  0%   { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Typing cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Counter count up */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero gradient shift */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── ANIMATION UTILITIES ─────────────────────────────────── */
+
+.anim-fade-in-up  { animation: fadeInUp 0.5s ease both; }
+.anim-fade-in     { animation: fadeIn 0.4s ease both; }
+.anim-scale-in    { animation: scaleIn 0.4s ease both; }
+.anim-slide-left  { animation: slideInLeft 0.5s ease both; }
+.anim-slide-right { animation: slideInRight 0.5s ease both; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* ─── LOADING SPINNER ────────────────────────────────────── */
+
+.spinner {
+  width: 22px; height: 22px;
+  border: 2.5px solid rgba(109,81,255,0.25);
+  border-top-color: var(--accent-purple);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  display: inline-block;
+}
+
+/* ─── SHIMMER SKELETON ───────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.04) 0px,
+    rgba(255,255,255,0.09) 40%,
+    rgba(255,255,255,0.04) 80%
+  );
+  background-size: 700px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-line {
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.skeleton-line:last-child { width: 60%; }
+
+/* ─── CONFIDENCE RING ────────────────────────────────────── */
+
+.confidence-ring-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confidence-ring {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 8px rgba(109,81,255,0.5));
+}
+
+.confidence-ring-bg { fill: none; stroke: rgba(255,255,255,0.07); }
+
+.confidence-ring-fill {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 314;
+  stroke-dashoffset: 314;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.confidence-ring-fill.animate {
+  animation: none; /* set via JS */
+}
+
+.confidence-ring-label {
+  position: absolute;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.confidence-ring-pct {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+
+.confidence-ring-text {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* ─── SCORE BAR ──────────────────────────────────────────── */
+
+.score-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.score-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-bar-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.score-bar-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.score-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  width: 0%;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── SCANNING OVERLAY (for analyze loading) ─────────────── */
+
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,11,20,0.7);
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  box-shadow: 0 0 12px var(--accent-cyan);
+  animation: scan 1.5s ease-in-out infinite;
+}
+
+.scan-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── RESULT REVEAL ──────────────────────────────────────── */
+
+.result-reveal {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ─── HIGHLIGHT SPANS ────────────────────────────────────── */
+
+.highlight-clickbait {
+  background: rgba(245,158,11,0.2);
+  border-bottom: 2px solid var(--accent-amber);
+  color: var(--accent-amber);
+  border-radius: 2px;
+  padding: 1px 2px;
+  cursor: help;
+}
+
+.highlight-misinfo {
+  background: rgba(239,68,68,0.18);
+  border-bottom: 2px solid var(--color-danger);
+  color: #fca5a5;
+  border-radius: 2px;
+  padding: 1px 2px;
+  cursor: help;
+}
+
+/* ─── FEATURE CARDS ──────────────────────────────────────── */
+
+.feature-icon-wrap {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: var(--space-4);
+  transition: var(--transition-normal);
+}
+
+.glass-card:hover .feature-icon-wrap { transform: scale(1.1) rotate(-3deg); }
+
+/* ─── FLOAT ANIMATION ────────────────────────────────────── */
+
+.anim-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ─── PULSE ANIMATIONS ───────────────────────────────────── */
+
+.pulse-purple { animation: pulseGlow 3s ease-in-out infinite; }
+.pulse-safe   { animation: pulseGlowSafe 3s ease-in-out infinite; }
+.pulse-danger { animation: pulseGlowDanger 3s ease-in-out infinite; }
+
+/* ─── HERO GRADIENT TEXT ─────────────────────────────────── */
+.hero-gradient-text {
+  background: linear-gradient(135deg, #a78bfa 0%, #f472b6 40%, #38bdf8 80%);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
